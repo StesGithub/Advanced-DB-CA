@@ -1,0 +1,76 @@
+{
+    "selector":{
+      "products.price":{
+        "$gte": 800
+      }
+    },
+    "fields":[
+      "purchase_id",
+      "customer_name",
+      "product",
+      "price"
+      
+      ],
+    "sort": [{"price": "desc"}],
+    "execution_stats": true
+  }
+
+
+  {
+    "selector": {
+      "price": {
+        "$gte": 800
+      }
+    },
+    "fields": [
+      "purchase_id",
+      "customer_name",
+      "product",
+      "price"
+    ],
+    "sort": [
+      {
+        "price": "desc"
+      }
+    ],
+    "execution_stats": true
+  }
+
+  {
+    "selector":{
+      "purchases": {
+        "$elematch":{
+          "price": { "&gte": 500}
+        }
+      }
+    },
+    "fields": [
+      "merchant_name",
+      "purchases"
+      ]
+  }
+
+
+  {
+    "selector": {
+      "category": {
+        "$eq": "Robotics"
+      }
+    },
+    "fields": [
+      "merchant_name",
+      "purchases"
+    ]
+  }
+
+
+  {
+    "_id": "_design/spendPerCustomer",
+    "_rev": "1-1bcb106f19f7739652487ae57d05e0f4",
+    "views": {
+      "totalSales": {
+        "map": "function(doc){if(doc.purchases){doc.purchases.forEach(function(p){emit(p.customer_name, p.price);});}}",
+        "reduce": "function(keys, values, rereduce){return sum(values);}"
+      }
+    }
+  }

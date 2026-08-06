@@ -1,0 +1,10 @@
+{
+  "_id": "_design/spendPerCustomer",
+  "_rev": "1-1bcb106f19f7739652487ae57d05e0f4",
+  "views": {
+    "totalSales": {
+      "map": "function(doc){if(doc.purchases){doc.purchases.forEach(function(p){emit(p.customer_name, p.price);});}}",
+      "reduce": "function(keys, values, rereduce){return sum(values);}"
+    }
+  }
+}
