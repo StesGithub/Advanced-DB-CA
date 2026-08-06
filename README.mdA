@@ -1,0 +1,6 @@
+Advanced Databases data warehouse project.
+
+Within this repo can be found the project code including the scaffold provided and individual additions to evaluate regional performance metrics of the dataset.
+
+This project also included a NoSQL portion using CouchDB to evaluate customer metrics.
+Details of implementation and rationale can be found in the report 
